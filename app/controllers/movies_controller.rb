@@ -8,6 +8,9 @@ class MoviesController < ApplicationController
     # Use the information after the slash in the URL to look up the movie with the corresponding ID number
     # Store the movie in the @movie instance variable so the view can format it
 
-    # @movie = ???
+    the_id = params[:id]
+
+     @movie = Movie.find_by({ :id => the_id})
+
   end
 end
