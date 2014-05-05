@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
     # Your Ruby goes here.
 
-    director1 = Movie.where({:id => 1})[7]
+    director1 = Movie.where({:id => 1}).select("director_id")
     @number_of_movies_directed_by_first_movie_director = Movie.count.director1
 
   end
@@ -31,7 +31,8 @@ class QuestionsController < ApplicationController
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
 
-    # @most_number_of_movies_by_a_single_director = ???
+    biggestgroup = Movie.order.select("director_id DESC").group
+    @most_number_of_movies_by_a_single_director = biggestgroup.count
   end
 
   def question_5
@@ -40,6 +41,8 @@ class QuestionsController < ApplicationController
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
 
-    # @most_recent_movie_for_first_actor = ???
+    actor_roles = Role.where({ :actor_id => Actor.first.id }).select("movie_id")
+    most_recent = actor_roles.order
+    @most_recent_movie_for_first_actor = most_recent.title
   end
 end
